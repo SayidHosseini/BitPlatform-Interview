@@ -1,0 +1,6 @@
+name: BitPlatformInterview
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: BitPlatform Interview Task 2 Implementation
