@@ -1,6 +1,9 @@
 from pulumi_azure_native import storage
 from pulumi import ResourceOptions
-from config import envs as config
+from src.config import Config
+
+
+config = Config()
 
 
 class BlobContainer:

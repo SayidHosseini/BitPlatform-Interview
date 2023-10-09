@@ -1,16 +1,16 @@
 import pulumi
-from storage_account import StorageAccount
-from blob_container import BlobContainer
-from vault import Vault
-from secret import Secret
+from src.storage_account import StorageAccount
+from src.blob_container import BlobContainer
+from src.vault import Vault
+from src.secret import Secret
 
 
 class Main():
     def __init__(self):
-        storage_account = StorageAccount().object
-        BlobContainer(storage_account)
+        sa = StorageAccount().object
+        BlobContainer(sa)
         vault = Vault()
-        secret = Secret(vault, storage_account, storage_account.connection_string).object
+        secret = Secret(vault, sa, sa.connection_string).object
 
         pulumi.export("secret_reference", secret.reference_string)
 

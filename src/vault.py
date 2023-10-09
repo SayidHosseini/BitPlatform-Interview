@@ -1,5 +1,8 @@
 from pulumi_azure_native import keyvault
-from config import envs as config
+from src.config import Config
+
+
+config = Config()
 
 
 class Vault:
