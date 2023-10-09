@@ -6,9 +6,9 @@ from src.config import Config
 config = Config()
 
 
-class Secret:
+class Secret(keyvault.Secret):
     def __init__(self, vault: keyvault.Vault, storage_account: storage.StorageAccount, secret: str,) -> None:
-        self.object: keyvault.secret.Secret = keyvault.Secret(
+        super().__init__(
             secret_name=config.secret_name,
             resource_name=config.secret_name,
             resource_group_name=config.resource_group_name,
@@ -19,7 +19,7 @@ class Secret:
             opts=ResourceOptions(parent=vault, depends_on=storage_account),
         )
 
-        self.object.reference_string: Output = Output.all(
+        self.reference_string: Output = Output.all(
             vault.name,
-            self.object.name,
+            self.name,
         ).apply(lambda args: f"@Microsoft.KeyVault(SecretUri=https://{args[0]}.vault.azure.net/secrets/{args[1]})/")

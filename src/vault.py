@@ -5,9 +5,9 @@ from src.config import Config
 config = Config()
 
 
-class Vault:
-    def __new__(self) -> keyvault.Vault:
-        return keyvault.Vault(
+class Vault(keyvault.Vault):
+    def __init__(self) -> None:
+        super().__init__(
             resource_name=config.vault_name,
             vault_name=config.vault_name,
             resource_group_name=config.resource_group_name,

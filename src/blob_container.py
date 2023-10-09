@@ -6,9 +6,9 @@ from src.config import Config
 config = Config()
 
 
-class BlobContainer:
+class BlobContainer(storage.BlobContainer):
     def __init__(self, storage_account: storage.StorageAccount) -> None:
-        storage.BlobContainer(
+        super().__init__(
             config.blob_container_name,
             account_name=storage_account.name,
             resource_group_name=config.resource_group_name,
